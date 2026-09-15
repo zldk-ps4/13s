@@ -40,9 +40,12 @@ body{background:#02050b}
 .g2all-center{width:1100px;max-width:94%}
 .hero-logo{display:block;width:390px;max-width:48vw;height:auto;margin:0 auto 4px;filter:drop-shadow(0 10px 22px rgba(0,0,0,.5))}
 .g2all-title{margin:4px 0 9px;font-size:60px}.gold{color:#62b9ff}.g2all-sub{margin-bottom:22px}
+.start-jailbreak-btn{display:block;min-width:320px;margin:0 auto 22px;padding:15px 34px;border:1px solid #ffe295;border-radius:10px;background:linear-gradient(180deg,#f8d36a 0%,#d9a72f 100%);color:#07111f;font-size:21px;line-height:1.2;font-weight:bold;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px rgba(225,174,50,.28),inset 0 1px 0 rgba(255,255,255,.45);text-shadow:0 1px 0 rgba(255,255,255,.25)}
+.start-jailbreak-btn:active{background:linear-gradient(180deg,#d9a72f 0%,#f0c34f 100%);-webkit-transform:translateY(1px);transform:translateY(1px)}
+.start-jailbreak-btn:disabled{cursor:default;opacity:.58;box-shadow:none}
 .status-card{width:820px;max-width:100%;padding:24px 32px;border-color:#2766a5;background:rgba(2,11,29,.93);box-shadow:0 16px 38px rgba(0,0,0,.32)}
-@media(max-height:760px){.hero-logo{width:285px}.g2all-title{font-size:48px}.g2all-sub{margin-bottom:14px}.status-card{padding:18px 25px}.g2all-footer{margin-top:12px}}
-@media(max-width:900px){.hero-logo{width:320px;max-width:70vw}.g2all-title{font-size:46px}}
+@media(max-height:760px){.hero-logo{width:250px}.g2all-title{font-size:44px}.g2all-sub{margin-bottom:11px}.start-jailbreak-btn{min-width:280px;margin-bottom:13px;padding:12px 30px;font-size:18px}.status-card{padding:16px 24px}.g2all-footer{margin-top:10px}}
+@media(max-width:900px){.hero-logo{width:320px;max-width:70vw}.g2all-title{font-size:46px}.start-jailbreak-btn{min-width:280px;max-width:90%;font-size:18px}}
 
 /* Unified branding across every host page */
 .cache-wrap{width:960px;max-width:94%}

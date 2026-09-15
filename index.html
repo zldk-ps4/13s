@@ -15,79 +15,99 @@ var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
 var isPS4 = match !== null;
 var fwVersion = isPS4 ? match[1] : "Unknown";
 var fwNum = parseFloat(fwVersion);
+var jailbreakStarted = false;
+
+function isSupportedFirmware() {
+    return (fwNum >= 7.00 && fwNum <= 8.52) ||
+           (fwNum >= 9.00 && fwNum <= 9.60) ||
+           (fwNum >= 10.00 && fwNum <= 11.02) ||
+           (fwNum >= 11.50 && fwNum <= 13.00);
+}
+
+function setButtonState(disabled, label) {
+    var button = document.getElementById("startJailbreakBtn");
+    if (!button) return;
+    button.disabled = disabled;
+    button.innerHTML = label;
+}
 
 function onScriptError() {
-    msgs.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
+    var message = document.getElementById("msgs");
+    if (message) message.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
+    jailbreakStarted = false;
+    setButtonState(false, "Try Again");
 }
 
-if (!isPS4) {
-    document.addEventListener("DOMContentLoaded", () => {
-        msgs.innerHTML = "Only for PS4 with Firmware 7.00 to 13.00";
-    });
-} else {
-    if (window.applicationCache.status == '0') {
-        if (fwNum >= 7.00 && fwNum <= 8.52) {
-            window.location.replace("cache700.html");
-        } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-            window.location.replace("cache900.html");
-        } else if (fwNum >= 10.00 && fwNum <= 11.02) {
-            window.location.replace("cachecss.html");
-        } else if (fwNum >= 11.50 && fwNum <= 13.00) {
-            window.location.replace("cacheslopkit.html");
-        } else {
-            document.addEventListener("DOMContentLoaded", () => {
-                msgs.innerHTML = 'Unsupported Firmware: <span style="color: red;">' + fwVersion + '</span>';
-            });
-        }
-    } else {
-        if (fwNum >= 7.00 && fwNum <= 8.52) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "700/alert.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 9.00 && fwNum <= 9.60) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "900/alert.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 10.00 && fwNum <= 11.02) {
-            var script = document.createElement('script');
-            script.src = "css/main.js";
-            script.onerror = onScriptError;
-            script.onload = function () {
-                setTimeout(function () {
-                    doJb();
-                }, 500);
-            };
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 11.50 && fwNum <= 12.02) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "slopkit/chain_lapse.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 12.50 && fwNum <= 13.00) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "slopkit/chain_poops.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
+function startJailbreak() {
+    if (jailbreakStarted || !isPS4 || !isSupportedFirmware()) return;
+
+    jailbreakStarted = true;
+    setButtonState(true, "Starting Jailbreak...");
+    var message = document.getElementById("msgs");
+    if (message) message.innerHTML = "Loading GoldHEN v2.4b18.10... Please Wait";
+
+    var script = document.createElement("script");
+    script.onerror = onScriptError;
+
+    if (fwNum >= 7.00 && fwNum <= 8.52) {
+        script.type = "module";
+        script.src = "700/alert.js";
+    } else if (fwNum >= 9.00 && fwNum <= 9.60) {
+        script.type = "module";
+        script.src = "900/alert.js";
+    } else if (fwNum >= 10.00 && fwNum <= 11.02) {
+        script.src = "css/main.js";
+        script.onload = function () {
+            setTimeout(function () { doJb(); }, 500);
+        };
+    } else if (fwNum >= 11.50 && fwNum <= 12.02) {
+        script.type = "module";
+        script.src = "slopkit/chain_lapse.js";
+    } else if (fwNum >= 12.50 && fwNum <= 13.00) {
+        script.type = "module";
+        script.src = "slopkit/chain_poops.js";
+    }
+
+    document.head.appendChild(script);
+}
+
+if (isPS4 && window.applicationCache.status == '0') {
+    if (fwNum >= 7.00 && fwNum <= 8.52) {
+        window.location.replace("cache700.html");
+    } else if (fwNum >= 9.00 && fwNum <= 9.60) {
+        window.location.replace("cache900.html");
+    } else if (fwNum >= 10.00 && fwNum <= 11.02) {
+        window.location.replace("cachecss.html");
+    } else if (fwNum >= 11.50 && fwNum <= 13.00) {
+        window.location.replace("cacheslopkit.html");
     }
 }
-document.addEventListener("DOMContentLoaded",function(){var f=document.getElementById("fwinfo");if(f)f.innerHTML=isPS4?"Detected Firmware: "+fwVersion:"PS4 browser required for jailbreak";});
+
+document.addEventListener("DOMContentLoaded", function () {
+    var firmwareInfo = document.getElementById("fwinfo");
+    var message = document.getElementById("msgs");
+
+    if (firmwareInfo) {
+        firmwareInfo.innerHTML = isPS4 ? "Detected Firmware: " + fwVersion : "PS4 browser required for jailbreak";
+    }
+
+    if (!isPS4) {
+        if (message) message.innerHTML = "Only for PS4 with Firmware 7.00 to 13.00";
+        setButtonState(true, "Start Jailbreak");
+    } else if (!isSupportedFirmware()) {
+        if (message) message.innerHTML = 'Unsupported Firmware: <span style="color: red;">' + fwVersion + '</span>';
+        setButtonState(true, "Unsupported Firmware");
+    } else {
+        if (message) message.innerHTML = "Ready — Press Start Jailbreak";
+        setButtonState(false, "Start Jailbreak");
+    }
+});
 </script>
 <div class="g2all-center">
   <img class="hero-logo" src="ps4-jailbreak-logo.png" alt="PS4 Jailbreak">
-  <h1 class="g2all-title">PS4 Jailbreak <span class="gold">7.00 - 13.00</span></h1>
   <p class="g2all-sub">FAST &nbsp;•&nbsp; CLEAN &nbsp;•&nbsp; OFFLINE</p>
-  <div class="status-card"><div class="status-label"><span class="dot"></span> SYSTEM STATUS</div><h1 id="msgs" class="g2all-msg">Loading GoldHEN v2.4b18.10... Please Wait</h1><div class="divider"></div><div class="meta" id="fwinfo">Detecting PS4 firmware...</div></div><div class="g2all-footer">PS4 Host by ZoLDiK</div>
+  <button id="startJailbreakBtn" class="start-jailbreak-btn" type="button" onclick="startJailbreak()" disabled>Start Jailbreak</button>
+  <div class="status-card"><div class="status-label"><span class="dot"></span> SYSTEM STATUS</div><h1 id="msgs" class="g2all-msg">Loading GoldHEN v2.4b18.10... Please Wait</h1><div class="divider"></div><div class="meta" id="fwinfo">Detecting PS4 firmware...</div></div><div class="g2all-footer">Host by ZoLDiK</div>
 </div>
 </body>
 </html>
