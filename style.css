@@ -106,3 +106,65 @@ body{font-family:"Trebuchet MS","Segoe UI",Arial,Helvetica,sans-serif;color:#f7f
 .progress-bar{border-radius:7px;background:linear-gradient(90deg,#348de0,#75c1ff);box-shadow:0 0 12px rgba(75,164,245,.35)}
 @media(max-height:760px){.hero-logo,.cache-logo{width:270px;margin-bottom:7px}.g2all-sub{margin-bottom:14px}.start-jailbreak-btn{min-width:310px;margin-bottom:15px;padding:13px 32px;font-size:18px}.status-card,.cache-page .status-card{padding:17px 25px}.g2all-footer{margin-top:10px}.cache-brand{font-size:39px}.cache-title{margin-bottom:14px}}
 @media(max-width:900px){.hero-logo,.cache-logo{width:310px;max-width:68vw}.g2all-sub{font-size:13px;letter-spacing:1.8px}.start-jailbreak-btn{min-width:290px;max-width:90%;padding:14px 28px;font-size:18px}.status-card,.cache-page .status-card{padding:20px 22px;border-radius:14px}.g2all-msg,.cache-msg{font-size:19px}.meta{font-size:13px}.cache-brand{font-size:40px}.cache-title{font-size:13px}}
+
+/* ZoLDiK v4.1 — Vibrant Modern Zoom (all host and cache pages) */
+html,body{background:#02051a}
+.g2all-page,.cache-page{
+  background-color:#02051a;
+  background-image:
+    radial-gradient(circle at 15% 18%,rgba(0,214,255,.29) 0,rgba(0,139,255,.10) 24%,transparent 43%),
+    radial-gradient(circle at 86% 20%,rgba(142,72,255,.34) 0,rgba(91,41,214,.12) 27%,transparent 46%),
+    radial-gradient(ellipse at 50% 102%,rgba(255,33,166,.17) 0,rgba(65,52,224,.10) 34%,transparent 65%),
+    linear-gradient(145deg,#03143a 0%,#07164a 38%,#151250 68%,#050820 100%);
+}
+.g2all-page:after,.cache-page:after{
+  left:5%;right:5%;bottom:-180px;height:390px;
+  background:radial-gradient(ellipse at center,rgba(0,195,255,.22) 0,rgba(80,70,255,.09) 43%,transparent 72%);
+}
+.g2all-center,.cache-wrap{width:1080px;max-width:94%}
+.hero-logo,.cache-logo{
+  width:440px;max-width:52vw;height:auto;margin:0 auto 10px;object-fit:contain;
+  filter:drop-shadow(0 16px 32px rgba(0,0,0,.48)) drop-shadow(0 0 20px rgba(56,166,255,.22));
+}
+.g2all-sub{margin-bottom:28px;color:#c4d8ff;font-size:17px;letter-spacing:2.7px;text-shadow:0 0 14px rgba(61,171,255,.32)}
+.start-jailbreak-btn{
+  min-width:410px;margin-bottom:28px;padding:19px 46px;
+  border:2px solid rgba(255,255,255,.82);border-radius:999px;
+  background:linear-gradient(100deg,#12d6ff 0%,#4776ff 42%,#9b50ff 72%,#f345b5 100%);
+  color:#fff;font-size:24px;letter-spacing:1.25px;text-shadow:0 2px 8px rgba(18,8,70,.48);
+  box-shadow:0 13px 38px rgba(61,103,255,.42),0 0 28px rgba(24,210,255,.22),inset 0 1px 0 rgba(255,255,255,.52);
+}
+.start-jailbreak-btn:active{
+  background:linear-gradient(100deg,#0abce5 0%,#365fe1 43%,#8140e4 74%,#d6329a 100%);
+  box-shadow:0 7px 22px rgba(61,103,255,.34),inset 0 2px 5px rgba(16,6,67,.28);
+}
+.start-jailbreak-btn:disabled{opacity:.62;box-shadow:0 8px 22px rgba(58,91,221,.20)}
+.status-card,.cache-page .status-card{
+  width:850px;padding:29px 38px 27px;
+  border:1px solid rgba(94,190,255,.65);border-radius:22px;
+  background:linear-gradient(145deg,rgba(6,27,70,.94),rgba(17,13,67,.93));
+  box-shadow:0 25px 66px rgba(0,0,0,.39),0 0 28px rgba(35,139,255,.11),inset 0 1px 0 rgba(187,228,255,.12);
+}
+.g2all-msg,.cache-msg{font-size:25px;line-height:1.42;letter-spacing:.25px}
+.divider{margin:20px 0 16px;background:linear-gradient(90deg,transparent 0%,#1fd0ff 22%,#765fff 52%,#e746c4 80%,transparent 100%);opacity:.58}
+.meta{color:#abc5ed;font-size:16px}.g2all-footer{margin-top:23px;color:#8eaee0;font-size:14px}
+.gold{color:#60ddff;text-shadow:0 0 15px rgba(70,192,255,.30)}
+.cache-brand{font-size:55px;margin-bottom:10px}.cache-title{margin-bottom:25px;color:#c4d8ff;font-size:16px}
+.progress-shell{height:11px;margin-top:25px;border-color:#347fca;background:#061634}
+.progress-bar{background:linear-gradient(90deg,#11d9ff,#4d78ff 52%,#c14dff);box-shadow:0 0 18px rgba(38,186,255,.52)}
+@media(max-height:760px){
+  .hero-logo,.cache-logo{width:300px;margin-bottom:6px}
+  .g2all-sub{margin-bottom:16px;font-size:15px}
+  .start-jailbreak-btn{min-width:350px;margin-bottom:17px;padding:15px 38px;font-size:21px}
+  .status-card,.cache-page .status-card{padding:20px 30px}
+  .g2all-msg,.cache-msg{font-size:22px}.g2all-footer{margin-top:11px}
+  .cache-brand{font-size:43px}.cache-title{margin-bottom:15px}
+}
+@media(max-width:900px){
+  .hero-logo,.cache-logo{width:350px;max-width:70vw}
+  .g2all-sub{font-size:15px;letter-spacing:2px}
+  .start-jailbreak-btn{min-width:330px;max-width:92%;padding:16px 32px;font-size:21px}
+  .status-card,.cache-page .status-card{padding:24px 27px;border-radius:19px}
+  .g2all-msg,.cache-msg{font-size:22px}.meta{font-size:15px}
+  .cache-brand{font-size:46px}.cache-title{font-size:14px}
+}
