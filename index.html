@@ -31,10 +31,28 @@ function setButtonState(disabled, label) {
     button.innerHTML = label;
 }
 
+function setJailbreakVisualState(state) {
+    var button = document.getElementById("startJailbreakBtn");
+    if (!button) return;
+    button.className = "start-jailbreak-btn" + (state ? " " + state : "");
+}
+
+function showJailbreakSuccess() {
+    var message = document.getElementById("msgs");
+    if (message) {
+        message.innerHTML = "Jailbreak Success (^_^) Welcome To Freedom";
+        message.className = "g2all-msg jailbreak-success";
+        message.style.color = "";
+    }
+    setJailbreakVisualState("success");
+    setButtonState(true, "Jailbreak Complete");
+}
+
 function onScriptError() {
     var message = document.getElementById("msgs");
     if (message) message.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
     jailbreakStarted = false;
+    setJailbreakVisualState("error");
     setButtonState(false, "Try Again");
 }
 
@@ -42,6 +60,7 @@ function startJailbreak() {
     if (jailbreakStarted || !isPS4 || !isSupportedFirmware()) return;
 
     jailbreakStarted = true;
+    setJailbreakVisualState("running");
     setButtonState(true, "Starting Jailbreak...");
     var message = document.getElementById("msgs");
     if (message) message.innerHTML = "Loading GoldHEN v2.4b18.10... Please Wait";
@@ -86,6 +105,18 @@ if (isPS4 && window.applicationCache.status == '0') {
 document.addEventListener("DOMContentLoaded", function () {
     var firmwareInfo = document.getElementById("fwinfo");
     var message = document.getElementById("msgs");
+
+    // Keep the success UI consistent across all supported exploit chains.
+    if (message && window.MutationObserver) {
+        var successObserver = new MutationObserver(function () {
+            var statusText = message.textContent || message.innerText || "";
+            if (/GoldHEN.*Loaded|GoldHEN is Already Loaded/i.test(statusText)) {
+                successObserver.disconnect();
+                showJailbreakSuccess();
+            }
+        });
+        successObserver.observe(message, { childList: true, characterData: true, subtree: true });
+    }
 
     if (firmwareInfo) {
         firmwareInfo.innerHTML = isPS4 ? "Detected Firmware: " + fwVersion : "PS4 browser required for jailbreak";
