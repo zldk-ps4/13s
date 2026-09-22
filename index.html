@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var message = document.getElementById("msgs");
 
     if (firmwareInfo) {
-        firmwareInfo.innerHTML = isPS4 ? "Detected Firmware: " + fwVersion : "PS4 browser required for jailbreak";
+        firmwareInfo.innerHTML = isPS4 ? 'Detected Firmware: <span class="firmware-number">' + fwVersion + '</span>' : "PS4 browser required for jailbreak";
     }
 
     if (!isPS4) {
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
   <button id="startJailbreakBtn" class="start-jailbreak-btn" type="button" onclick="startJailbreak()" disabled>Start Jailbreak</button>
   <div class="status-card">
     <div class="status-head">
-      <div class="ready-state"><span class="ready-dot"></span> Ready</div>
+      <div class="ready-state"><span class="ready-dot"></span><span>Ready</span></div>
       <div class="meta" id="fwinfo">Detecting PS4 firmware...</div>
     </div>
     <h1 id="msgs" class="g2all-msg">Loading GoldHEN... Please Wait</h1>
