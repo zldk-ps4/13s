@@ -119,9 +119,13 @@ body{
 
 .start-jailbreak-btn:active{transform:translateY(1px)}
 .start-jailbreak-btn:disabled{
-  opacity:.66;
+  opacity:1;
   cursor:default;
-  box-shadow:0 8px 22px rgba(58,91,221,.16);
+  box-shadow:
+    0 14px 34px rgba(9,105,216,.28),
+    -12px 5px 30px rgba(217,9,36,.10),
+    12px 5px 30px rgba(17,139,66,.12),
+    inset 0 1px 0 rgba(255,255,255,.42);
 }
 
 .status-card{
